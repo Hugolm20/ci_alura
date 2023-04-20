@@ -9,7 +9,6 @@ on:
 jobs:
 
   test:
-    name: Test on node ${{ matrix.go_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -29,6 +28,10 @@ jobs:
       
     - name: Create-DB
       run: docker-compose up -d
+      
+    - name: Test
+      run: go test -v main_test.go 
+    
       
   build:
     needs: test
